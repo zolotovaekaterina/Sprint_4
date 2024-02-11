@@ -2,11 +2,13 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class BrowserConnection {
@@ -45,7 +47,7 @@ public class BrowserConnection {
     }
 
     public WebDriver getDriver() {
-        String driverType = "firefox";//System.getenv("BROWSER");
+        String driverType = System.getenv("BROWSER");
 
         switch (driverType) {
             case "chrome":
@@ -58,5 +60,12 @@ public class BrowserConnection {
         }
 
          return null;
+    }
+
+    public void scrollToItem(By locator) {
+        WebElement element = driver.findElement(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        new WebDriverWait(driver, Duration.ofMillis(1000L))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }
