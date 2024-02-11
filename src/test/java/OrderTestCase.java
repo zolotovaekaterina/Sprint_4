@@ -1,18 +1,13 @@
 import org.junit.Before;
 import org.junit.Test;
 
-public class FirefoxTest extends FirefoxConnection {
+public class OrderTestCase extends BrowserConnection {
 
-    SamokatTestCase testCase;
+    DataForTest testCase;
 
     @Before
     public void prepare() {
-        testCase = new SamokatTestCase(driver);
-    }
-
-    @Test
-    public void checkTextInQuestionsTest() {
-        testCase.checkTextInQuestionsTest();
+        testCase = new DataForTest(driver);
     }
 
     @Test

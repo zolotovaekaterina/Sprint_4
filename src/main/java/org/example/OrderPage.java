@@ -55,30 +55,7 @@ public class OrderPage {
 
     private void selectRentalDay(int day) {
         driver.findElement(By.className("Dropdown-placeholder")).click();
-        switch (day) {
-            case 1:
-                driver.findElement(By.xpath(".//*[@class='Dropdown-option'][1]")).click();
-                break;
-            case 2:
-                driver.findElement(By.xpath(".//*[@class='Dropdown-option'][2]")).click();
-                break;
-            case 3:
-                driver.findElement(By.xpath(".//*[@class='Dropdown-option'][3]")).click();
-                break;
-            case 4:
-                driver.findElement(By.xpath(".//*[@class='Dropdown-option'][4]")).click();
-                break;
-            case 5:
-                driver.findElement(By.xpath(".//*[@class='Dropdown-option'][5]")).click();
-                break;
-            case 6:
-                driver.findElement(By.xpath(".//*[@class='Dropdown-option'][6]")).click();
-                break;
-            case 7:
-                driver.findElement(By.xpath(".//*[@class='Dropdown-option'][7]")).click();
-                break;
-            default:
-                break;
-        }
+        String xpath = String.format(".//*[@class='Dropdown-option'][%d]", day);
+        driver.findElement(By.xpath(xpath)).click();
     }
 }

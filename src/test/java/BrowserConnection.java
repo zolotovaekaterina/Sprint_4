@@ -5,10 +5,11 @@ import org.junit.Before;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class ChromeConnection {
+public class BrowserConnection {
 
     static String pageName = "https://qa-scooter.praktikum-services.ru/";
     static Cookie[] cartochka = {
@@ -20,8 +21,8 @@ public class ChromeConnection {
 
     @Before
     public void openChrome() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+
+        driver = getDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         openPage(pageName);
         setCookies(cartochka);
@@ -41,5 +42,21 @@ public class ChromeConnection {
     @After
     public void quitBrowser() {
         driver.quit();
+    }
+
+    public WebDriver getDriver() {
+        String driverType = "firefox";//System.getenv("BROWSER");
+
+        switch (driverType) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                return new ChromeDriver();
+
+            case "firefox":
+                System.setProperty("webdriver.gecko.driver", "/Users/ekaterina/WebDriver/geckodriver");
+                return new FirefoxDriver();
+        }
+
+         return null;
     }
 }

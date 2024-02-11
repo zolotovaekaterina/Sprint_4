@@ -2,16 +2,19 @@ import org.example.HomePage;
 import org.example.OrderDataTest;
 import org.example.OrderPage;
 import org.example.OrderPageComplete;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SamokatTestCase {
 
+@RunWith(Parameterized.class)
+public class DataForTest {
   WebDriver driver;
 
-  public SamokatTestCase(WebDriver driver) {
+  public DataForTest(WebDriver driver) {
     this.driver = driver;
   }
 
@@ -21,7 +24,7 @@ public class SamokatTestCase {
 
   public void checkTextInQuestionsTest() {
     HomePage homePage = new HomePage(driver);
-    for (String heading : HomePage.headings) {
+    for (String heading : HomePage.headingsQuestions) {
       assertEquals(
           homePage.getQuestionsAboutImportant(heading),
           homePage.getExpectedQuestionText(heading)

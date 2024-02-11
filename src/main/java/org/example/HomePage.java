@@ -8,6 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
+import static org.junit.Assert.assertEquals;
 
 public class HomePage {
 
@@ -17,14 +20,7 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public String getQuestionsAboutImportant(String heading) {
-        By locator = By.id(heading);
-        scrollToItem(locator);
-        driver.findElement(locator).click();
-        return driver.findElement(By.xpath(getHeadingXpath(heading))).getText();
-    }
-
-    public static String[] headings = {
+    public static String[] headingsQuestions = {
             "accordion__heading-0",
             "accordion__heading-1",
             "accordion__heading-2",
@@ -88,6 +84,13 @@ public class HomePage {
     public OrderPage openOrderPageInBody() {
         driver.findElement(By.className("Button_Middle__1CSJM")).click();
         return new OrderPage(driver);
+    }
+
+    public String getQuestionsAboutImportant(String heading) {
+        By locator = By.id(heading);
+        scrollToItem(locator);
+        driver.findElement(locator).click();
+        return driver.findElement(By.xpath(getHeadingXpath(heading))).getText();
     }
 
     private void scrollToItem(By locator) {
